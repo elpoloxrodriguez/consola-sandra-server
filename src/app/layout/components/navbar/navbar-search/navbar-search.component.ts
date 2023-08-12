@@ -133,12 +133,12 @@ export class NavbarSearchComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this._searchService.onApiDataChange.subscribe(res => {
-      this.apiData = res;
-      this.pages = this.apiData[0].data;
-      this.pageSearchLimit = this.apiData[0].searchLimit;
-      this.files = this.apiData[1].data;
-      this.contacts = this.apiData[2].data;
-    });
+    // this._searchService.onApiDataChange.subscribe(res => {
+    //   this.apiData = res;
+    //   this.pages = this.apiData[0].data;
+    //   this.pageSearchLimit = this.apiData[0].searchLimit;
+    //   this.files = this.apiData[1].data;
+    //   this.contacts = this.apiData[2].data;
+    // });
   }
 }

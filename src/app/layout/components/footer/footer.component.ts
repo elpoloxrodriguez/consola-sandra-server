@@ -5,6 +5,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import { CoreConfigService } from '@core/services/config.service';
 
+import { VERSION } from '@angular/core';
+
+
 @Component({
   selector: 'footer',
   templateUrl: './footer.component.html'
@@ -16,6 +19,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   // Private
   private _unsubscribeAll: Subject<any>;
 
+  public myVersion
   /**
    * Constructor
    *
@@ -33,6 +37,7 @@ export class FooterComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    this.myVersion = VERSION.full
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;

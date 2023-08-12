@@ -1,12 +1,18 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
+
 import { CoreConfigService } from '@core/services/config.service';
+
 import { IToken, LoginService } from '@services/seguridad/login.service';
-import Swal from 'sweetalert2';
+
+import { Router } from '@angular/router';
+
+import { environment } from 'environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { UtilService } from '@services/util/util.service';
 
 
 
@@ -19,17 +25,22 @@ import Swal from 'sweetalert2';
 export class AuthLoginV2Component implements OnInit {
   //  Public
   public coreConfig: any;
-  public loginForm: FormGroup;
-  public loading = false;
+  public loginForm: UntypedFormGroup;
   public submitted = false;
-  public returnUrl: string;
-  public error = '';
   public passwordTextType: boolean;
-  public usuario: string;
+  public usuario : string;
   public clave: string;
 
-  public iToken: IToken = { token: '', };
+  public loading = false;
+  public isHidden: boolean = true;
+
+  public iToken: IToken = {
+    token: '',
+  };
+
   public itk: IToken;
+
+
   // Private
   private _unsubscribeAll: Subject<any>;
 
@@ -37,14 +48,19 @@ export class AuthLoginV2Component implements OnInit {
    * Constructor
    *
    * @param {CoreConfigService} _coreConfigService
+   * @param {FormBuilder} _formBuilder
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _formBuilder: FormBuilder,
-    private _route: ActivatedRoute,
-    private loginService: LoginService,
-    private _router: Router
-  ) {
+    private _formBuilder: UntypedFormBuilder,
+    private router: Router,
+    private loginService: LoginService, 
+    private toastrService: ToastrService,
+    private utilservice: UtilService,
+    ) {
+      if (sessionStorage.getItem("token") != undefined ){
+        this.router.navigate(['principal']);
+      }
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -77,26 +93,9 @@ export class AuthLoginV2Component implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  onSubmit() {
-    this.submitted = true;
-    // this.login(this.loginForm)
 
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-    if (sessionStorage.getItem("token") != undefined) {
-      this._router.navigate(['/']);
-    }
-
-    // Login
-    this.loading = true;
-
-    // redirect to home page
-    setTimeout(() => {
-      this._router.navigate(['/']);
-    }, 200);
-  }
+  public version = "1.0.0"
+  public fecha = ""
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -105,56 +104,18 @@ export class AuthLoginV2Component implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    if (sessionStorage.getItem("token") != undefined) {
-      this._router.navigate(['/home'])
-      return
-   }
+    this.version = environment.version
+    this.fecha = environment.fecha
+
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required]
     });
 
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
-
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-  }
-
-  login() {
-    this.submitted = true;
-    this.loading = true;
-    this.loginService.getLogin(this.usuario, this.clave).subscribe(
-      (data) => { // Success
-        this.itk = data;
-        sessionStorage.setItem("token", this.itk.token);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Bienvenido a Sandra Server',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this._router.navigate(['/home']);
-        return
-      },
-      (error) => {
-        this.loading = false;
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        })
-        Toast.fire({
-          icon: 'error',
-          title: error.error
-        })
-      }
-    );
   }
 
   /**
@@ -165,4 +126,30 @@ export class AuthLoginV2Component implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+  async login(position, status){
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    } else {
+    this.loading = true;
+    await this.loginService.getLogin(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+      (data) => { // Success
+        this.itk = data;
+        sessionStorage.setItem("token", this.itk.token );
+        this.loading = false;
+        this.isHidden = false;
+        this.router.navigate(['home']).then(() => { window.location.reload() });
+      },
+      (error) => {
+        this.loading = false;
+        this.isHidden = false;
+        this.utilservice.AlertMini('top-end','error','Error al acceder a los datos de conexion del Bus Empresarial',3000)
+      }
+    );
+    }
+  }
+
+  
 }

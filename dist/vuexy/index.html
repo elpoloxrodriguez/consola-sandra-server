@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="utf-8">
+    <title>Code-Epic | Sandra Server</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="En informática un Bus de Servicio Empresarial es un modelo de arquitectura de software que gestiona la comunicación entre servicios web. Es un componente fundamental de la Arquitectura Orientada a Servicios.">
+    <meta name="keywords" content="En informática un Bus de Servicio Empresarial es un modelo de arquitectura de software que gestiona la comunicación entre servicios web. Es un componente fundamental de la Arquitectura Orientada a Servicios.">
+    <meta name="author" content="CODE-EPIC TECHNOLOGIES">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+      rel="stylesheet"
+    /> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script> -->
+
+    <!-- Vuexy loading Screen CSS -->
+    <style type="text/css">
+      #loading-bg {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        display: block;
+        position: absolute;
+        z-index: 99999;
+        pointer-events: none;
+      }
+
+      .loading-logo {
+        position: absolute;
+        left: calc(50% - 45px);
+        top: 50%;
+      }
+
+      .loading {
+        position: absolute;
+        left: calc(50% - 50px);
+        top: 50%;
+        width: 53px;
+        height: 53px;
+        border-radius: 50%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 3px solid transparent;
+      }
+
+      .loading .effect-1,
+      .loading .effect-2 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        border-left: 3px solid rgb(255, 149, 0);
+        border-radius: 50%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      .loading .effect-1 {
+        animation: rotate 1s ease infinite;
+      }
+
+      .loading .effect-2 {
+        animation: rotateOpacity 1s ease infinite 0.1s;
+      }
+
+      .loading .effect-3 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        border-left: 3px solid rgb(255, 149, 0);
+        -webkit-animation: rotateOpacity 1s ease infinite 0.2s;
+        animation: rotateOpacity 1s ease infinite 0.2s;
+        border-radius: 50%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      .loading .effects {
+        transition: all 0.3s ease;
+      }
+
+      @keyframes rotate {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(1turn);
+          transform: rotate(1turn);
+        }
+      }
+
+      @keyframes rotateOpacity {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 0.1;
+        }
+
+        100% {
+          -webkit-transform: rotate(1turn);
+          transform: rotate(1turn);
+          opacity: 1;
+        }
+      }
+    </style>
+    <!-- / Vuexy loading Screen CSS -->
+  <style>@charset "UTF-8";:root{--blue:#00cfe8;--indigo:#6610f2;--purple:#7367f0;--pink:#e83e8c;--red:#ea5455;--orange:#ff9f43;--yellow:#ffc107;--green:#28c76f;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#b8c2cc;--gray-dark:#1e1e1e;--primary:#7367f0;--secondary:#82868b;--success:#28c76f;--info:#00cfe8;--warning:#ff9f43;--danger:#ea5455;--light:#f6f6f6;--dark:#4b4b4b;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--breakpoint-xxl:1440px;--font-family-sans-serif:"Montserrat", Helvetica, Arial, serif;--font-family-monospace:"Montserrat", Helvetica, Arial, serif}*,*:before,*:after{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(34,41,47,0)}body{margin:0;font-family:Montserrat,Helvetica,Arial,serif;font-size:1rem;font-weight:400;line-height:1.45;color:#6e6b7b;text-align:left;background-color:#f8f8f8}img{vertical-align:middle;border-style:none}@media print{*,*:before,*:after{text-shadow:none!important;box-shadow:none!important}img{page-break-inside:avoid}@page{size:a3}body{min-width:992px!important}}html{font-size:14px;height:100%;letter-spacing:.01rem}html body{height:100%;background-color:#f8f8f8;direction:ltr}@media screen and (min-width: 0px){head{font-family:"xs 0px"}body:after{content:"xs - min-width: 0px"}}@media screen and (min-width: 544px){head{font-family:"sm 544px"}body:after{content:"sm - min-width: 544px"}}@media screen and (min-width: 768px){head{font-family:"md 768px"}body:after{content:"md - min-width: 768px"}}@media screen and (min-width: 992px){head{font-family:"lg 992px"}body:after{content:"lg - min-width: 992px"}}@media screen and (min-width: 1200px){head{font-family:"xl 1200px"}body:after{content:"xl - min-width: 1200px"}}head{clear:both}head title{font-family:"xs 0px, sm 544px, md 768px, lg 992px, xl 1200px"}body:after{display:none}:root{--fc-daygrid-event-dot-width:8px}:root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-color:#f5f5f5}</style><link rel="stylesheet" href="styles.57bafebaebfe53d8.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.57bafebaebfe53d8.css"></noscript></head>
+
+  <body>
+    <!-- Vuexy loading Screen -->
+    <core-loading-screen id="loading-bg">
+      <div class="loading-logo">
+        <img src="assets/images/logo/logo.png" width="5%" height="5%" alt="Logo">
+      </div>
+      <div class="loading">
+        <div class="effect-1 effects"></div>
+        <div class="effect-2 effects"></div>
+        <div class="effect-3 effects"></div>
+      </div>
+    </core-loading-screen>
+    <!-- / Vuexy loading Screen -->
+
+    <!-- Vuexy root component -->
+    <app-root> </app-root>
+    <!-- / Vuexy root component -->
+  <script src="runtime.78ed1aab695458d8.js" type="module"></script><script src="polyfills.11ecdb6de6be097c.js" type="module"></script><script src="scripts.4ae802783b270725.js" defer></script><script src="main.567a710e9ddf6e7b.js" type="module"></script>
+
+</body></html>

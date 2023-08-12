@@ -26,15 +26,15 @@
               <span [data-feather]="'grid'"></span>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownSettings">
-              <a ngbDropdownItem [routerLink]="['/']"
-                ><span [data-feather]="'check-square'" [class]="'mr-50'"></span> Todo</a
+              <a ngbDropdownItem [routerLink]="['/networks/communications']"
+                ><span [data-feather]="'server'" [class]="'mr-50'"></span> Servidores</a
               >
-              <a ngbDropdownItem [routerLink]="['/']"
-                ><span [data-feather]="'message-square'" [class]="'mr-50'"></span> Chat</a
+              <a ngbDropdownItem [routerLink]="['/networks/connections']"
+                ><span [data-feather]="'hard-drive'" [class]="'mr-50'"></span> Conexiones</a
               >
-              <a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'" [class]="'mr-50'"></span> Email</a>
-              <a ngbDropdownItem [routerLink]="['/']"
-                ><span [data-feather]="'calendar'" [class]="'mr-50'"></span> Calendar</a
+              <a ngbDropdownItem [routerLink]="['/tools/api']"><span [data-feather]="'tool'" [class]="'mr-50'"></span> Api Rest</a>
+              <a ngbDropdownItem [routerLink]="['/security/role']"
+                ><span [data-feather]="'lock'" [class]="'mr-50'"></span> Seguridad</a
               >
             </div>
           </div>

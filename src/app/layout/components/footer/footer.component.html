@@ -2,11 +2,11 @@
 <p class="clearfix mb-0">
   <span class="float-md-left d-block d-md-inline-block mt-25">
     COPYRIGHT &copy; {{ year }}
-    <a class="ml-25" href="https://code-epic.com" target="_blank">Code-Epic</a>
+    <a class="ml-25" href="https://code-epic.com" target="_blank">Code-Epic Technologies</a>
     <span class="d-none d-sm-inline-block">, All rights Reserved</span>
   </span>
   <span class="float-md-right d-none d-md-block">
-    Code-Epic Technologies <span [data-feather]="'check'" [class]="'pink'"></span>
+    Version Angular {{myVersion}} <span [data-feather]="'check'" [class]="'pink'"></span>
   </span>
 </p>
 <!--/ Footer -->
@@ -16,7 +16,7 @@
 
 <!-- Buynow Button-->
 <div class="buy-now">
-  <a href="https://code-epic.com" target="_blank" class="btn btn-danger" *ngIf="coreConfig.layout.buyNow == true"
-    >Actualización</a
+  <a href="https://code-epic.com" target="_blank" class="btn btn-danger" *ngIf="coreConfig.layout.buyNow"
+    >Actualización Disponible</a
   >
 </div>

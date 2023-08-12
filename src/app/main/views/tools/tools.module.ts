@@ -41,7 +41,7 @@ const routes = [
 @NgModule({
   declarations: [
     FunctionsComponent,
-    ApiComponent,
+    // ApiComponent,
     WorkflowComponent
   ],
   imports: [RouterModule.forChild(routes), CommonModule, ContentHeaderModule, TranslateModule, CoreCommonModule],

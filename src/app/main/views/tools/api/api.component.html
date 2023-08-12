@@ -1,1 +1,1098 @@
-<p>api works!</p>
+
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <!-- content-header component -->
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <!-- Basic Alerts start -->
+        <section id="home-page">
+            <div class="row">
+                <div class="col-12">
+                    <!-- <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">API RESTFULL 🚀</h4>
+                    </div>
+                    </div> -->
+
+                    <ul ngbNav #navCenter="ngbNav" class="nav nav-pills justify-content-center">
+                        <li ngbNavItem>
+                            <a ngbNavLink><span [data-feather]="'cast'"></span> DESARROLLO</a>
+                            <ng-template ngbNavContent>
+                                <div class="content-detached content-center">
+                                    <div class="content-body">
+                                        <!-- E-commerce Head Section Starts -->
+                                        <section id="ecommerce-header">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="ecommerce-header-items">
+                                                        <div class="result-toggler">
+                                                            <button class="navbar-toggler shop-sidebar-toggler"
+                                                                type="button" data-toggle="collapse"
+                                                                (click)="toggleSidebar('ecommerce-sidebar')">
+                                                                <span
+                                                                    class="navbar-toggler-icon d-block d-lg-none"><i
+                                                                        data-feather="menu"></i></span>
+                                                            </button>
+                                                            <div class="search-results">{{ (products | filter:
+                                                                searchText: 'funcion').length
+                                                            }} Resultados
+                                                                encontrados</div>
+                                                        </div>
+                                                        <div class="view-options d-flex">
+                                                            <div class="btn-group dropdown-sort" ngbDropdown>
+                                                                <button class="btn btn-info btn-sm"
+                                                                    (click)="RegistrarAPI(modalRegAPI)">
+                                                                    Registrar Nueva API
+                                                                </button>&nbsp;
+                                                                <!-- <button ngbDropdownToggle type="button"
+                                                                    class="btn btn-outline-primary mr-1"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false" rippleEffect>
+                                                                    <span class="active-sorting">Registrar Nueva API</span>
+                                                                </button>
+                                                                <div ngbDropdownMenu>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('featured')">Featured</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-asc')">Lowest</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-desc')">Highest</a>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="btn-group btn-group-toggle"
+                                                                data-toggle="buttons">
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn grid-view-btn"
+                                                                    [class.active]="gridViewRef === true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option1" (click)="gridView()" />
+                                                                    <i data-feather="grid"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn list-view-btn"
+                                                                    [class.active]="gridViewRef !== true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option2" (click)="listView()" />
+                                                                    <i data-feather="list"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+                                            <div class="row mt-1">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="text" class="form-control search-product"
+                                                            id="shop-search" placeholder="Buscar APIS"
+                                                            aria-label="Search..." aria-describedby="shop-search"
+                                                            [(ngModel)]="searchText" />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i data-feather="search"
+                                                                    class="text-muted"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Head Section Starts -->
+
+                                        <!-- E-commerce Products Starts -->
+                                        <section id="ecommerce-products"
+                                            [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'">
+
+                                            <!-- Ecommerce Item -->
+                                            <div class="card ecommerce-card" *ngFor="
+                                                let product of products
+                                                | filter: searchText:'funcion'
+                                                | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+                                            ">
+                                                <div class="item-img text-center">
+                                                    <img class="img-fluid card-img-top"
+                                                        src="assets/images/pages/eCommerce/14.png"
+                                                        alt="img-placeholder" />
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <h6 class="item-name">
+                                                        <strong>{{ product.funcion }}</strong>
+                                                        <p>
+                                                            <span class="card-text item-company">
+                                                                {{ product.metodo }}</span>
+                                                    </h6>
+                                                    <p class="card-text item-description">
+                                                        {{ product.descripcion }}
+                                                    </p>
+                                                </div>
+                                                <div class="item-options text-center">
+                                                    <a href="javascript:void(0)" class="btn btn-info btn-wishlist"
+                                                        (click)="toggleWishlist(product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span>Promover</span>
+                                                    </a>
+                                                    <a class="btn btn-warning btn-cart" (click)="addToCart(product)"
+                                                        rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Modificar</span>
+                                                    </a>
+                                                    <a class="btn btn-success btn-cart"
+                                                        (click)="activarFormulario(frmSQL, product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Probar</span>
+                                                    </a>
+                                                </div>
+                                                <!--/ Ecommerce Item -->
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Products Ends -->
+
+                                        <!-- E-commerce Pagination Starts -->
+                                        <section id="ecommerce-pagination">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="d-flex justify-content-center">
+                                                        <ngb-pagination
+                                                            [collectionSize]="(products | filter: searchText:'funcion').length"
+                                                            [(page)]="page" [maxSize]="5" [rotate]="true"
+                                                            [ellipses]="false" [boundaryLinks]="true">
+                                                            <!-- Custom pagination icons -->
+                                                            <ng-template ngbPaginationPrevious><span
+                                                                    [data-feather]="'chevron-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationFirst><span
+                                                                    [data-feather]="'chevrons-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationNext><span
+                                                                    [data-feather]="'chevron-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span></ng-template>
+                                                            <ng-template ngbPaginationLast><span
+                                                                    [data-feather]="'chevrons-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                        </ngb-pagination>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Pagination Ends -->
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink><span [data-feather]="'cast'"></span> CALIDAD</a>
+                            <ng-template ngbNavContent>
+                                <div class="content-detached content-center">
+                                    <div class="content-body">
+                                        <!-- E-commerce Head Section Starts -->
+                                        <section id="ecommerce-header">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="ecommerce-header-items">
+                                                        <div class="result-toggler">
+                                                            <button class="navbar-toggler shop-sidebar-toggler"
+                                                                type="button" data-toggle="collapse"
+                                                                (click)="toggleSidebar('ecommerce-sidebar')">
+                                                                <span
+                                                                    class="navbar-toggler-icon d-block d-lg-none"><i
+                                                                        data-feather="menu"></i></span>
+                                                            </button>
+                                                            <div class="search-results">{{ (quality | filter:
+                                                                searchText: 'funcion').length
+                                                            }} Resultados
+                                                                encontrados</div>
+                                                        </div>
+                                                        <div class="view-options d-flex">
+                                                            <div class="btn-group dropdown-sort" ngbDropdown>
+                                                                <button ngbDropdownToggle type="button"
+                                                                    class="btn btn-outline-primary mr-1"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false" rippleEffect>
+                                                                    <span class="active-sorting">Filtro</span>
+                                                                </button>
+                                                                <div ngbDropdownMenu>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('featured')">Featured</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-asc')">Lowest</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-desc')">Highest</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="btn-group btn-group-toggle"
+                                                                data-toggle="buttons">
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn grid-view-btn"
+                                                                    [class.active]="gridViewRef === true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option1" (click)="gridView()" />
+                                                                    <i data-feather="grid"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn list-view-btn"
+                                                                    [class.active]="gridViewRef !== true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option2" (click)="listView()" />
+                                                                    <i data-feather="list"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+                                            <div class="row mt-1">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="text" class="form-control search-product"
+                                                            id="shop-search" placeholder="Buscar APIS"
+                                                            aria-label="Search..." aria-describedby="shop-search"
+                                                            [(ngModel)]="searchText" />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i data-feather="search"
+                                                                    class="text-muted"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Head Section Starts -->
+
+                                        <!-- E-commerce Products Starts -->
+                                        <section id="ecommerce-products"
+                                            [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'">
+
+                                            <!-- Ecommerce Item -->
+                                            <div class="card ecommerce-card" *ngFor="
+                                                let product of quality
+                                                | filter: searchText:'funcion'
+                                                | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+                                            ">
+                                                <div class="item-img text-center">
+                                                    <img class="img-fluid card-img-top"
+                                                        src="assets/images/pages/eCommerce/14.png"
+                                                        alt="img-placeholder" />
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <!-- <div class="item-wrapper">
+                                                        
+                                                        <div class="item-cost">
+                                                            <h6 class="item-price">{{ product.funcion.substr(0,50) }}</h6>
+                                                        </div>
+                                                    </div> -->
+                                                    <h6 class="item-name">
+                                                        <strong>{{ product.funcion }}</strong>
+                                                        <p>
+                                                            <span class="card-text item-company">
+                                                                {{ product.metodo }}</span>
+                                                    </h6>
+                                                    <p class="card-text item-description">
+                                                        {{ product.descripcion }}
+                                                    </p>
+                                                </div>
+                                                <div class="item-options text-center">
+                                                    <a href="javascript:void(0)" class="btn btn-info btn-wishlist"
+                                                        (click)="toggleWishlist(product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span>Promover</span>
+                                                    </a>
+                                                    <a class="btn btn-warning btn-cart" (click)="addToCart(product)"
+                                                        rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Modificar</span>
+                                                    </a>
+                                                    <a class="btn btn-success btn-cart"
+                                                        (click)="activarFormulario(frmSQL, product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Probar</span>
+                                                    </a>
+                                                </div>
+                                                <!--/ Ecommerce Item -->
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Products Ends -->
+
+                                        <!-- E-commerce Pagination Starts -->
+                                        <section id="ecommerce-pagination">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="d-flex justify-content-center">
+                                                        <ngb-pagination
+                                                            [collectionSize]="(quality | filter: searchText:'funcion').length"
+                                                            [(page)]="page" [maxSize]="5" [rotate]="true"
+                                                            [ellipses]="false" [boundaryLinks]="true">
+                                                            <!-- Custom pagination icons -->
+                                                            <ng-template ngbPaginationPrevious><span
+                                                                    [data-feather]="'chevron-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationFirst><span
+                                                                    [data-feather]="'chevrons-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationNext><span
+                                                                    [data-feather]="'chevron-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span></ng-template>
+                                                            <ng-template ngbPaginationLast><span
+                                                                    [data-feather]="'chevrons-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                        </ngb-pagination>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Pagination Ends -->
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink><span [data-feather]="'cast'"></span> PRODUCCIÓN</a>
+                            <ng-template ngbNavContent>
+                                <div class="content-detached content-center">
+                                    <div class="content-body">
+                                        <!-- E-commerce Head Section Starts -->
+                                        <section id="ecommerce-header">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="ecommerce-header-items">
+                                                        <div class="result-toggler">
+                                                            <button class="navbar-toggler shop-sidebar-toggler"
+                                                                type="button" data-toggle="collapse"
+                                                                (click)="toggleSidebar('ecommerce-sidebar')">
+                                                                <span
+                                                                    class="navbar-toggler-icon d-block d-lg-none"><i
+                                                                        data-feather="menu"></i></span>
+                                                            </button>
+                                                            <div class="search-results">{{ (production | filter:
+                                                                searchText: 'funcion').length
+                                                            }} Resultados
+                                                                encontrados</div>
+                                                        </div>
+                                                        <div class="view-options d-flex">
+                                                            <div class="btn-group dropdown-sort" ngbDropdown>
+                                                                <button ngbDropdownToggle type="button"
+                                                                    class="btn btn-outline-primary mr-1"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false" rippleEffect>
+                                                                    <span class="active-sorting">Filtro</span>
+                                                                </button>
+                                                                <div ngbDropdownMenu>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('featured')">Featured</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-asc')">Lowest</a>
+                                                                    <a ngbDropdownItem href="javascript:void(0);"
+                                                                        (click)="sortProduct('price-desc')">Highest</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="btn-group btn-group-toggle"
+                                                                data-toggle="buttons">
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn grid-view-btn"
+                                                                    [class.active]="gridViewRef === true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option1" (click)="gridView()" />
+                                                                    <i data-feather="grid"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                                <label
+                                                                    class="btn btn-icon btn-outline-primary view-btn list-view-btn"
+                                                                    [class.active]="gridViewRef !== true">
+                                                                    <input type="radio" name="radio_options"
+                                                                        id="radio_option2" (click)="listView()" />
+                                                                    <i data-feather="list"
+                                                                        class="font-medium-3"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+                                            <div class="row mt-1">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="text" class="form-control search-product"
+                                                            id="shop-search" placeholder="Buscar APIS"
+                                                            aria-label="Search..." aria-describedby="shop-search"
+                                                            [(ngModel)]="searchText" />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i data-feather="search"
+                                                                    class="text-muted"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Head Section Starts -->
+
+                                        <!-- E-commerce Products Starts -->
+                                        <section id="ecommerce-products"
+                                            [ngClass]="gridViewRef === true ? 'grid-view' : 'list-view'">
+
+                                            <!-- Ecommerce Item -->
+                                            <div class="card ecommerce-card" *ngFor="
+                                                let product of production
+                                                | filter: searchText:'funcion'
+                                                | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+                                            ">
+                                                <div class="item-img text-center">
+                                                    <img class="img-fluid card-img-top"
+                                                        src="assets/images/pages/eCommerce/14.png"
+                                                        alt="img-placeholder" />
+                                                </div>
+                                                <div class="card-body">
+                                                    <!-- <div class="item-wrapper">
+                                                        
+                                                        <div class="item-cost">
+                                                            <h6 class="item-price">{{ product.funcion.substr(0,50) }}</h6>
+                                                        </div>
+                                                    </div> -->
+                                                    <h6 class="item-name">
+                                                        <strong>{{ product.funcion }}</strong>
+                                                        <p>
+                                                            <span class="card-text item-company">
+                                                                {{ product.metodo }}</span>
+                                                    </h6>
+                                                    <p class="card-text item-description">
+                                                        {{ product.descripcion }}
+                                                    </p>
+                                                </div>
+                                                <div class="item-options text-center">
+                                                    <a href="javascript:void(0)" class="btn btn-info btn-wishlist"
+                                                        (click)="toggleWishlist(product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span>Promover</span>
+                                                    </a>
+                                                    <a class="btn btn-warning btn-cart" (click)="addToCart(product)"
+                                                        rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Modificar</span>
+                                                    </a>
+                                                    <a class="btn btn-success btn-cart"
+                                                        (click)="activarFormulario(frmSQL, product)" rippleEffect>
+                                                        <i data-feather="shopping-cart" class="mr-25"></i>
+                                                        <span class="add-to-cart">Probar</span>
+                                                    </a>
+                                                </div>
+                                                <!--/ Ecommerce Item -->
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Products Ends -->
+
+                                        <!-- E-commerce Pagination Starts -->
+                                        <section id="ecommerce-pagination">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="d-flex justify-content-center">
+                                                        <ngb-pagination
+                                                            [collectionSize]="(production | filter: searchText:'funcion').length"
+                                                            [(page)]="page" [maxSize]="5" [rotate]="true"
+                                                            [ellipses]="false" [boundaryLinks]="true">
+                                                            <!-- Custom pagination icons -->
+                                                            <ng-template ngbPaginationPrevious><span
+                                                                    [data-feather]="'chevron-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationFirst><span
+                                                                    [data-feather]="'chevrons-left'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                            <ng-template ngbPaginationNext><span
+                                                                    [data-feather]="'chevron-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span></ng-template>
+                                                            <ng-template ngbPaginationLast><span
+                                                                    [data-feather]="'chevrons-right'"
+                                                                    [class]="'font-weight-bolder'"
+                                                                    [size]="18"></span>
+                                                            </ng-template>
+                                                        </ngb-pagination>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- E-commerce Pagination Ends -->
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navCenter" class="mt-1"></div>
+
+
+                    <!-- </div> -->
+                </div>
+            </div>
+        </section>
+        <!-- Basic Alerts end -->
+    </div>
+</div>
+
+
+<ng-template #frmSQL let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Laboratorio de Pruebas</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+
+
+        <ul ngbNav #navCenter="ngbNav" class="nav nav-pills justify-content-center">
+            <li ngbNavItem>
+                <a ngbNavLink><i data-feather="shopping-cart" class="mr-25"></i> Prueba de API</a>
+                <ng-template ngbNavContent>
+                    <div class="form-group">
+                        <label for="basicInput">Parametros</label>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="xparametro" value="{{xparametro}}" placeholder="Ingrese Parametros" />
+                    </div>
+                    <div class="form-group">
+                        <label>Valores</label>
+                            <ngx-codemirror [ngModelOptions]="{standalone: true}" [(ngModel)]="valores"
+                            [options]="codeMOEsquemaJson"></ngx-codemirror>
+                    </div>
+                    <div class="form-group">
+                        <label for="basicInput">Ejecutar función</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="xentorno" value="{{xentorno}}" readonly>&nbsp;
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-success btn-xs" (click)="ejecutarApi()">
+                                    <i class="fa fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Resultado</label>
+                        <div style="width:100%; height:150%; overflow: scroll;">
+                            <div id="xrs" style="font-size:11px; width: 100%; height: 150px;"></div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink><i data-feather="shopping-cart" class="mr-25"></i> Fragmento de Código</a>
+                <ng-template ngbNavContent>
+                    <fieldset class="form-label-group mb-0">
+                        <textarea [ngModelOptions]="{standalone: true}" [(ngModel)]="codeTypeJs"
+                            value="{{codeTypeJs}}" #textLength [maxlength]="99999999999"
+                            class="form-control char-textarea" id="textarea-counter" rows="17"
+                            placeholder="Ejemplo de ejecución"></textarea>
+                        <label for="textarea-counter">Ejemplo de ejecución</label>
+                    </fieldset>
+                    <small class="textarea-counter-value float-right"><span *ngIf="textLength" class="char-count">{{
+                            textLength.value.length
+                    }}</span>
+                        <span *ngIf="!textLength" class="char-count">0 </span>
+                    </small>
+                </ng-template>
+            </li>
+        </ul>
+        <div [ngbNavOutlet]="navCenter" class="mt-1"></div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Accept click')" rippleEffect>
+            Cerrar
+        </button>
+    </div>
+</ng-template>
+
+
+
+
+<ng-template #modalRegAPI let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">Registar una Nueva API</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+
+        <!-- Horizontal Wizard -->
+<section class="horizontal-wizard">
+    <div id="stepper1" class="bs-stepper horizontal-wizard-example">
+      <div class="bs-stepper-header">
+        <div class="step" data-target="#account-details">
+          <button class="step-trigger">
+            <span class="bs-stepper-box">1</span>
+            <span class="bs-stepper-label">
+              <span class="bs-stepper-title">Account Details</span>
+              <span class="bs-stepper-subtitle">Setup Account Details</span>
+            </span>
+          </button>
+        </div>
+        <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+        <div class="step" data-target="#personal-info">
+          <button class="step-trigger">
+            <span class="bs-stepper-box">2</span>
+            <span class="bs-stepper-label">
+              <span class="bs-stepper-title">Personal Info</span>
+              <span class="bs-stepper-subtitle">Add Personal Info</span>
+            </span>
+          </button>
+        </div>
+        <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+        <div class="step" data-target="#address">
+          <button class="step-trigger">
+            <span class="bs-stepper-box">3</span>
+            <span class="bs-stepper-label">
+              <span class="bs-stepper-title">Address</span>
+              <span class="bs-stepper-subtitle">Add Address</span>
+            </span>
+          </button>
+        </div>
+        <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+        <div class="step" data-target="#social-links">
+          <button class="step-trigger">
+            <span class="bs-stepper-box">3</span>
+            <span class="bs-stepper-label">
+              <span class="bs-stepper-title">Social Links</span>
+              <span class="bs-stepper-subtitle">Add Social Links</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="bs-stepper-content">
+        <form (ngSubmit)="(HWForm.form.valid)" #HWForm="ngForm">
+          <div id="account-details" class="content">
+            <form #accountDetailsForm="ngForm">
+              <div class="content-header">
+                <h5 class="mb-0">Account Details</h5>
+                <small class="text-muted">Enter Your Account Details.</small>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="username">Username</label>
+                  <input
+                    [(ngModel)]="TDNameVar"
+                    #TDNameRef="ngModel"
+                    required
+                    type="text"
+                    name="username"
+                    id="username"
+                    class="form-control"
+                    [class.error]="!TDNameRef.valid && accountDetailsForm.submitted"
+                    placeholder="johndoe"
+                  />
+                  <span *ngIf="accountDetailsForm.submitted && TDNameRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="TDNameRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="email">Email</label>
+                  <input
+                    [(ngModel)]="TDEmailVar"
+                    #TDEmailRef="ngModel"
+                    required
+                    email
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    [class.error]="!TDEmailRef.valid && accountDetailsForm.submitted"
+                    placeholder="john.doe@email.com"
+                    aria-label="john.doe"
+                  />
+                  <span *ngIf="accountDetailsForm.submitted" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="!TDEmailRef.valid">Email must be valid!</small>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group form-password-toggle col-md-6">
+                  <label class="form-label" for="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="form-control"
+                    [class.error]="!TDPasswordOnlyRef.valid && accountDetailsForm.submitted"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    ngModel
+                    #TDPasswordOnlyRef="ngModel"
+                    required
+                    minlength="6"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  />
+                  <div
+                    *ngIf="TDPasswordOnlyRef.invalid && accountDetailsForm.submitted"
+                    class="form-text text-danger"
+                  >
+                    <small *ngIf="TDPasswordOnlyRef.errors.required"> Password is required. </small>
+                    <small *ngIf="TDPasswordOnlyRef.errors.pattern">
+                      Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more
+                      characters.</small
+                    >
+                  </div>
+                </div>
+                <div class="form-group form-password-toggle col-md-6">
+                  <label class="form-label" for="confirm-password">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="confirm-password"
+                    id="confirm-password"
+                    class="form-control"
+                    [class.error]="!TDRepeatPasswordRef.valid && accountDetailsForm.submitted"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    required
+                    ngModel
+                    #TDRepeatPasswordRef="ngModel"
+                    pattern="{{ TDPasswordOnlyRef.value }}"
+                    minlength="6"
+                  />
+                  <div
+                    *ngIf="TDRepeatPasswordRef.invalid && accountDetailsForm.submitted"
+                    class="form-text text-danger"
+                  >
+                    <small *ngIf="TDRepeatPasswordRef.errors.required"> Confirm password is required. </small>
+                    <small *ngIf="TDRepeatPasswordRef.errors.pattern">
+                      Password & Confirm Password does not match.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button
+                  (click)="horizontalWizardStepperPrevious()"
+                  class="btn btn-outline-secondary btn-prev"
+                  disabled
+                  rippleEffect
+                >
+                  <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button
+                  (click)="horizontalWizardStepperNext(accountDetailsForm)"
+                  type="submit"
+                  class="btn btn-primary btn-next"
+                  rippleEffect
+                >
+                  <span class="align-middle d-sm-inline-block d-none">Next</span>
+                  <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="personal-info" class="content">
+            <form #personalInfoForm="ngForm">
+              <div class="content-header">
+                <h5 class="mb-0">Personal Info</h5>
+                <small>Enter Your Personal Info.</small>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="first-name">First Name</label>
+                  <input
+                    [(ngModel)]="TDFirstNameVar"
+                    #TDFirstNameRef="ngModel"
+                    required
+                    type="text"
+                    name="first-name"
+                    id="first-name"
+                    class="form-control"
+                    [class.error]="personalInfoForm.submitted && TDFirstNameRef.invalid"
+                    placeholder="John"
+                  />
+                  <span *ngIf="personalInfoForm.submitted && TDFirstNameRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="TDFirstNameRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="last-name">Last Name</label>
+                  <input
+                    [(ngModel)]="TDLastNameVar"
+                    #TDLastNameRef="ngModel"
+                    required
+                    type="text"
+                    name="last-name"
+                    id="last-name"
+                    class="form-control"
+                    [class.error]="personalInfoForm.submitted && TDLastNameRef.invalid"
+                    placeholder="Doe"
+                  />
+                  <span *ngIf="personalInfoForm.submitted && TDLastNameRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="TDLastNameRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="country">Country</label>
+                  <ng-select [items]="selectBasic" bindLabel="name"> </ng-select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="language">Language</label>
+                  <ng-select
+                    [items]="selectMulti"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="name"
+                    name="selectLanguage"
+                    placeholder="Select people"
+                    [(ngModel)]="selectMultiSelected"
+                  >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      <span class="ng-value-label"> {{ item.name }}</span>
+                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  (click)="horizontalWizardStepperPrevious()"
+                  class="btn btn-primary btn-prev"
+                  rippleEffect
+                >
+                  <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button
+                  (click)="horizontalWizardStepperNext(personalInfoForm)"
+                  class="btn btn-primary btn-next"
+                  rippleEffect
+                >
+                  <span class="align-middle d-sm-inline-block d-none">Next</span>
+                  <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="address" class="content">
+            <form #addressForm="ngForm">
+              <div class="content-header">
+                <h5 class="mb-0">Address</h5>
+                <small>Enter Your Address.</small>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="address">Address</label>
+                  <input
+                    [(ngModel)]="addressVar"
+                    #addressRef="ngModel"
+                    required
+                    type="text"
+                    id="address"
+                    name="address"
+                    class="form-control"
+                    [class.error]="addressForm.submitted && addressRef.invalid"
+                    placeholder="98  Borough bridge Road, Birmingham"
+                  />
+                  <span *ngIf="addressForm.submitted && addressRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="addressRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="landmark">Landmark</label>
+                  <input
+                    [(ngModel)]="landmarkVar"
+                    #landmarkRef="ngModel"
+                    required
+                    type="text"
+                    name="landmark"
+                    id="landmark"
+                    class="form-control"
+                    [class.error]="addressForm.submitted && landmarkRef.invalid"
+                    placeholder="Borough bridge"
+                  />
+                  <span *ngIf="addressForm.submitted && landmarkRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="landmarkRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="pincode1">Pincode</label>
+                  <input type="text" id="pincode1" class="form-control" placeholder="658921" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="city1">City</label>
+                  <input type="text" id="city1" class="form-control" placeholder="Birmingham" />
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  (click)="horizontalWizardStepperPrevious()"
+                  class="btn btn-primary btn-prev"
+                  rippleEffect
+                >
+                  <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button
+                  (click)="horizontalWizardStepperNext(addressForm)"
+                  class="btn btn-primary btn-next"
+                  rippleEffect
+                >
+                  <span class="align-middle d-sm-inline-block d-none">Next</span>
+                  <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="social-links" class="content">
+            <form #socialLinkForm="ngForm">
+              <div class="content-header">
+                <h5 class="mb-0">Social Links</h5>
+                <small>Enter Your Social Links.</small>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="twitter">Twitter</label>
+                  <input
+                    [(ngModel)]="twitterVar"
+                    #twitterkRef="ngModel"
+                    required
+                    type="text"
+                    id="twitter"
+                    name="twitter"
+                    class="form-control"
+                    [class.error]="socialLinkForm.submitted && twitterkRef.invalid"
+                    placeholder="https://twitter.com/abc"
+                  />
+                  <span *ngIf="socialLinkForm.submitted && twitterkRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="twitterkRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="facebook">Facebook</label>
+                  <input
+                    [(ngModel)]="facebookVar"
+                    #facebookRef="ngModel"
+                    required
+                    type="text"
+                    id="facebook"
+                    name="facebook"
+                    class="form-control"
+                    [class.error]="socialLinkForm.submitted && facebookRef.invalid"
+                    placeholder="https://facebook.com/abc"
+                  />
+                  <span *ngIf="socialLinkForm.submitted && facebookRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="facebookRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="google">Google+</label>
+                  <input
+                    [(ngModel)]="googleVar"
+                    #googleRef="ngModel"
+                    required
+                    type="text"
+                    id="google"
+                    name="google"
+                    class="form-control"
+                    [class.error]="socialLinkForm.submitted && googleRef.invalid"
+                    placeholder="https://plus.google.com/abc"
+                  />
+                  <span *ngIf="socialLinkForm.submitted && googleRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="googleRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="linkedin">Linkedin</label>
+                  <input
+                    [(ngModel)]="linkedinVar"
+                    #linkedinRef="ngModel"
+                    required
+                    type="text"
+                    id="linkedin"
+                    name="linkedin"
+                    class="form-control"
+                    [class.error]="socialLinkForm.submitted && linkedinRef.invalid"
+                    placeholder="https://linkedin.com/abc"
+                  />
+                  <span *ngIf="socialLinkForm.submitted && linkedinRef.invalid" class="invalid-form">
+                    <small class="form-text text-danger" *ngIf="linkedinRef.errors.required"
+                      >This field is required!</small
+                    >
+                  </span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  (click)="horizontalWizardStepperPrevious()"
+                  class="btn btn-primary btn-prev"
+                  rippleEffect
+                >
+                  <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+              </div>
+            </form>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!--/ Horizontal Wizard -->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Accept click')" rippleEffect>
+            Cerrar
+        </button>
+    </div>
+</ng-template>

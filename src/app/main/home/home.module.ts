@@ -10,6 +10,14 @@ import { CoreCommonModule } from '@core/common.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 import { HomeComponent } from './home.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ApiComponent } from '../views/tools/api/api.component';
+// import { MiscellaneousModule } from '../miscellaneous/miscellaneous.module';
 
 
 const routes = [
@@ -23,8 +31,20 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
+  declarations: [HomeComponent,ApiComponent],
+  imports: [
+    RouterModule.forChild(routes),
+    ContentHeaderModule,
+    TranslateModule,
+    CoreCommonModule,
+    CommonModule,
+    NgxDatatableModule,
+    CoreCommonModule,
+    NgbModule,
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [HomeComponent]
 })
 export class HomeModule { }
