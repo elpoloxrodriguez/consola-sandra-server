@@ -1,1 +1,181 @@
 <p>communications works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- content-header component -->
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <!-- Kitchen Sink Datatables -->
+    <section id="ngx-datatable-kitchen-sink">
+          <h4 class="card-title">Kitchen Sink</h4>
+          <div class="row">
+            <div class="col-12 mb-50">
+              <button class="btn btn-primary ml-1" rippleEffect>
+                <i data-feather="plus" class="mr-0 mr-sm-1"></i
+                ><span class="d-none d-sm-inline-block">Add New Record</span>
+              </button>
+
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <label class="d-flex align-items-center"
+                  >Show
+                  <select class="form-control mx-25" [(ngModel)]="basicSelectedOption">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  entries</label
+                >
+              </div>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-md-end">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pl-1 pl-md-0 pb-md-0">
+                <label class="d-flex align-items-center"
+                  >Search<input
+                    type="search"
+                    placeholder="Search"
+                    class="form-control ml-25"
+                    (keyup)="filterUpdate($event)"
+                    (search)="filterUpdate($event)"
+                /></label>
+              </div>
+            </div>
+          </div>
+          <ngx-datatable
+            [rows]="rows"
+            [rowHeight]="58"
+            class="bootstrap core-bootstrap"
+            [limit]="10"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [scrollbarH]="true"
+            [selectionType]="SelectionType.checkbox"
+            [limit]="basicSelectedOption"
+            (activate)="onActivate($event)"
+            (select)="onSelect($event)"
+          >
+            <!-- <ngx-datatable-column
+              [width]="50"
+              [sortable]="false"
+              [canAutoResize]="false"
+              [draggable]="false"
+              [resizeable]="false"
+            >
+              <ng-template
+                ngx-datatable-header-template
+                let-value="value"
+                let-allRowsSelected="allRowsSelected"
+                let-selectFn="selectFn"
+              >
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [checked]="allRowsSelected"
+                    (change)="selectFn(!allRowsSelected)"
+                    id="headerChkbxRef"
+                  />
+                  <label class="custom-control-label" for="headerChkbxRef"></label>
+                </div>
+              </ng-template>
+              <ng-template
+                ngx-datatable-cell-template
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-isSelected="isSelected"
+                let-onCheckboxChangeFn="onCheckboxChangeFn"
+              >
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [checked]="isSelected"
+                    (change)="onCheckboxChangeFn($event)"
+                    id="rowChkbxRef{{ rowIndex }}"
+                  />
+                  <label class="custom-control-label" for="rowChkbxRef{{ rowIndex }}"></label>
+                </div>
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="Host" prop="host" [width]="10">
+                <ng-template let-host="value" ngx-datatable-cell-template>
+                  <div>
+                    <span class="font-weight-bold">{{ host }} </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Mac" prop="mac" [width]="10">
+                <ng-template let-mac="value" ngx-datatable-cell-template>
+                  <div>
+                    <span class="font-weight-bold">{{ mac }} </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Tipo" prop="tipo" [width]="10">
+                <ng-template let-tipo="value" ngx-datatable-cell-template>
+                  <div>
+                    <span class="font-weight-bold">{{ tipo }} </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Identificador" prop="id" [width]="10">
+                <ng-template let-id="value" ngx-datatable-cell-template>
+                  <div>
+                    <span class="font-weight-bold">{{ id }} </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Descripcion" prop="descripcion" [width]="10">
+                <ng-template let-descripcion="value" ngx-datatable-cell-template>
+                  <div>
+                    <span class="font-weight-bold">{{ descripcion }} </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+            <ngx-datatable-column name="Actions" [width]="120" [sortable]="false">
+              <ng-template ngx-datatable-cell-template>
+                <div class="d-flex align-items-center">
+                  <div ngbDropdown container="body">
+                    <a
+                      ngbDropdownToggle
+                      href="javascript:void(0);"
+                      class="hide-arrow"
+                      id="dropdownBrowserState"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i data-feather="more-vertical" class="text-primary cursor-pointer mr-50"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownBrowserState">
+                      <a href="javascript:void(0)" ngbDropdownItem class="d-flex align-items-center"
+                        ><i data-feather="file-text" class="mr-50"></i> Details</a
+                      >
+                      <a href="javascript:void(0)" ngbDropdownItem class="d-flex align-items-center"
+                        ><i data-feather="archive" class="mr-50"></i> Archive</a
+                      >
+                      <a href="javascript:void(0)" ngbDropdownItem class="d-flex align-items-center"
+                        ><i data-feather="trash-2" class="mr-50"></i> Delete</a
+                      >
+                    </div>
+                  </div>
+  
+                  <i data-feather="edit" class="text-primary cursor-pointer"></i>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+      </section>
+      <!--/ Kitchen Sink Datatables -->
+  
+
+    </div>
+</div>

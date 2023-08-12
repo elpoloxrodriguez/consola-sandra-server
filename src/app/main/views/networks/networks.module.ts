@@ -9,6 +9,15 @@ import { CoreCommonModule } from '@core/common.module';
 
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgSelectModule } from '@ng-select/ng-select';
+
+
 import { CommunicationsComponent } from './communications/communications.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
@@ -44,6 +53,16 @@ const routes = [
     ConnectionsComponent,
     MonitoringComponent
   ],
-  imports: [RouterModule.forChild(routes), CommonModule, ContentHeaderModule, TranslateModule, CoreCommonModule],
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule,
+    ContentHeaderModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxDatatableModule,
+    NgbModule,
+    NgSelectModule,
+    CoreCommonModule],
 })
 export class NetworksModule { }
