@@ -71,7 +71,18 @@ export class CommunicationsComponent implements OnInit {
   estatus = 0
   rowData: any;
   dispositivo: string = '0'
-  dispositivos = []
+
+  public sDispositivo
+
+  public dispositivos = [
+    {id:'SRV', descripcion: 'SERVIDORES'},
+    {id:'ROU', descripcion: 'ROUTERS'},
+    {id:'SWI', descripcion: 'SWITCHES'},
+    {id:'IMP', descripcion: 'IMPRESORAS'},
+    {id:'LHU', descripcion: 'LECTOR BIOMETRICO'},
+    {id:'DVR', descripcion: 'DVR - CAMARAS'},
+    {id:'CIP', descripcion: 'CAMARAS IP'},
+  ]
 
 
   // public
@@ -101,7 +112,9 @@ export class CommunicationsComponent implements OnInit {
 
   async ngOnInit() {
 
-    await this.CargarLista()
+    if(this.sDispositivo == undefined){
+      await this.CargarLista('SRV')
+    } 
 
      // content header
      this.contentHeader = {
@@ -153,9 +166,10 @@ export class CommunicationsComponent implements OnInit {
     this.selected.push(...selected);
   }
 
-  async CargarLista(){
+  async CargarLista(e: any){
     this.xAPI.funcion = "LstComunicaciones";
-    this.xAPI.parametros = 'SRV';
+    this.xAPI.parametros = e;
+    this.rows = []
      await this.apiService.Ejecutar(this.xAPI).subscribe(
       (data) => {
           this.rows = data;
@@ -168,6 +182,10 @@ export class CommunicationsComponent implements OnInit {
         console.log(error)
       }
     ) 
+  }
+
+  async capturar(e:any){
+    await this.CargarLista(e.id)
   }
 
 
